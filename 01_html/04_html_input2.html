@@ -33,8 +33,24 @@
       </div>
 
       <div class="field">
-        <label for="sex">성별</label>
-        <input type="text" id="sex" name="sex" autocomplete="off">
+        <fieldset>
+          <legend>성별</legend>
+
+          <label class="choice">
+            <input type="radio" name="sex" value="F" required>
+            <span>여자</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="sex" value="M">
+            <span>남자</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="sex" value="S">
+            <span>비밀</span>
+          </label>
+        </fieldset>
       </div>
 
       <div class="field">
