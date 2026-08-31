@@ -122,7 +122,16 @@ mathScore 라는 변수에 수학점수, engScore라는 변수에 영어점수�
 평균값을 저장합니다. 
  */ 
 
-var avgScore = 90;
+/*
+1. 기본적으로 웬만한 데이터는 string으로 받습니다. 
+2. 형변환이 자동으로 되는 언어이기 때문에 자료형에 따라 의도치 않은 결과가 나오기도 합니다.
+3. 형변환 해주고, 연산을 해주면 됩니다.
+ */ 
+var mathScore = Number("90");
+var engScore = Number("80");
+var avgScore = (mathScore+engScore)/2 
+
+
 console.log(`평균 점수는 ${avgScore}점입니다.`)
 // 대문자로 자료형을 쓰면 형변환 함수가 됩니다. 
 
@@ -140,37 +149,90 @@ console.log(Boolean({}))
   5) +, - 연산이 동작합니다.
   6) ++, --   a -=  1   a--(후위식) / --a(전위식)
 */
+var num = 0;
+var resultA = num--; 
+//num;
+//num = num+1; // 후위증가연산자 쓰고 메모리에 돌려놓을 때 1을 더해서 돌려놓음 
+num;
+resultA; // 0
 
+var num1 = 0;
+var resultB =  --num1; // 쓸 때 1을 더하고 사용한다: 전위증가연산자 
+resultB // -1
+num1;
 
+console.log(3 ** 3) // 제곱
 
 /* 5. 비교연산자
+= (대입연산자) var a = 1;
 == (항등연산자, 동등성 비교): 값이 같은지
 === (완전항등연산자, 동일성 비교): 자료형, 값까지 비교
 */
+console.log(1 == "1") // 항등연산자 true 
+console.log(1 === "1") // ===을 손에 익히는 것을 권장: 자료형/값을 함께 비교 false
 
 /* 
 6. 논리연산자 &&(and), ||(or), !(not) 
 */
 
+console.log(false && true) // and = 둘 다 참이어야만 true
+console.log(false || true) // or = 하나라도 참이면 true
+console.log(!true) // not = 원래 조건의 반대
 
 
 // 7. 조건문 : if ~ else if ~ else / switch ~ case 문이 존재합니다. 
+// if (조건) {
+//   조건이 참인 경우의 실행문1;
+//   조건이 참인 경우의 실행문2;
+// } 
 
+// if 가 진짜고 나머지들은 거들 뿐입니다.
+if (1 === "1") {
+  console.log("참입니다!");
+} else if (2 === "1") {
+  console.log("두번째 조건이 참입니다.")
+} else if (3 === "1") {
+  console.log("세번째 조건이 참입니다.")
+} else { // else 절에는 다른 조건을 작성하는 부분이 없습니다.
+  console.log("거짓입니다")
+}
 
 /* 실습1: 아래 자바스크립트가 제공하는 Date 객체를 활용하여
 현재 시간이 12시보다 작은 시간이면 AM, 큰 시간이면 PM을 출력하는 시계를 만들어 주세요. */
-// let date = new Date() // 현재 날짜와 시간 기준으로 생성
-// date = new Date("2025/12/25"); // 입력받은 문자열을 파싱하여 생성 - 한국시간대라서 -9해서 출력됨
+
+let date = new Date(); // 현재 날짜와 시간 기준으로 생성
+
+/// 1. 필요한 위치에서 date.getHours()를 직접 호출 
+// if 현재 시간이 12시보다 적은 시간이면 AM
+if (date.getHours() < 12) {
+  console.log(`AM ${date.getHours()} 시`)
+  // else 이면 PM 
+} else {
+  console.log(`PM ${date.getHours()-12} 시`)
+}
+
+
+// 2. 한 번 변수에 담아놓고 조건문 안에서 계속 재사용: 추후 유지보수 고려해서 
+let hour = date.getHours();
+
+if (hour < 12) {
+  console.log(`AM ${date.getHours()} 시`)
+  // else 이면 PM 
+} else {
+  console.log(`PM ${date.getHours()-12} 시`)
+}
+date
+// date = new Date("2025/12/25"/; // 입력받은 문자열을 파싱하여 생성 - 한국시간대라서 -9해서 출력됨
 // date
-// date.getFullYear();
-// date.getMonth()+1; // 월이 0부터 시작함 
+console.log(date.getFullYear());
+console.log(date.getMonth() + 1); // 월이 0부터 시작함 
 // date.getDate();
 // date.getDay(); // 0(일) ~ 6(토)
-// date.getHours(); // 0 ~ 23
+console.log(date.getHours()); // 0 ~ 23
 // date.getMinutes(); // 0 ~ 59
 
 
-/* swtich (명제) {
+/* switch (명제) {
     case (1) : 조건 만족시 실행문
                break;
     case (2) : 조건 만족시 실행문
@@ -180,12 +242,25 @@ console.log(Boolean({}))
 }
 */
 
-
-
 /* 실습2: if / switch 문으로 각각 작성해보세요.
 1. 짜장면  2. 짬뽕   3. 샐러드 중 하나를 받으면 
 menu + 를 드시는군요. 를 출력
 1, 2, 3 이 아닌 경우는 '그럼 뭐 드실래요?'를 출력해보세요. */
+var menu = "마라탕";
+switch (menu) {
+  case ("짜장면"):
+    console.log(menu + "를 드시는군요 ")
+    break;
+  case ("짬뽕"):
+    console.log(menu + "를 드시는군요 ")
+    break; // 코드블럭({}) 바깥으로 강제로 나가게 만드는 명령문 
+  case ("샐러드"):
+    console.log(menu + "를 드시는군요 ")   
+    // break; // 어차피 마지막 줄이라면 생략 가능  
+  default: // 셋 다 참이 아닐 경우 (else)
+    console.log("그럼 뭐 드실래요?")
+} 
 
+// if문으로 변경
 
 // 삼항연산자 - 불표현식 ? 참 : 거짓
