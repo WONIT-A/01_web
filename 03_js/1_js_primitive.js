@@ -246,7 +246,7 @@ console.log(date.getHours()); // 0 ~ 23
 1. 짜장면  2. 짬뽕   3. 샐러드 중 하나를 받으면 
 menu + 를 드시는군요. 를 출력
 1, 2, 3 이 아닌 경우는 '그럼 뭐 드실래요?'를 출력해보세요. */
-var menu = "마라탕";
+var menu = "돈까스";
 switch (menu) {
   case ("짜장면"):
     console.log(menu + "를 드시는군요 ")
@@ -261,6 +261,47 @@ switch (menu) {
     console.log("그럼 뭐 드실래요?")
 } 
 
-// if문으로 변경
+// 다중조건문: 1개 이상의 조건으로 참/거짓을 판단하는 조건문
+// if문으로 변경 ==(값만) / ===(값과 자료형을 함께 비교)
+if (menu === "짜장면") { // 조건1 
+  console.log(menu + "를 드시는군요.")
+} else if (menu === "짬뽕" ) { // 조건2
+  console.log(menu + "를 드시는군요.")
+} else if (menu === "샐러드" ) { // 조건3 
+  console.log(menu + "를 드시는군요.")
+} else {
+    console.log("그럼 뭐 드실래요?")
+}
+
+// 복합조건문: 연산자 && (and) / || (or) / ! (not) 으로 여러개 조건을 한번에 비교할 수 있습니다.
+if (menu === "짜장면" || menu === "짬뽕" || menu === "샐러드") { // 조건1 
+  console.log(menu + "를 드시는군요.") // 참일 경우의 동작은 같으므로 
+} else {
+    console.log("그럼 뭐 드실래요?")
+}
 
 // 삼항연산자 - 불표현식 ? 참 : 거짓
+(menu === "짜장면" || menu === "짬뽕" || menu === "샐러드") ? 
+  console.log(menu + "를 드시는군요.") :
+    console.log("그럼 뭐 드실래요?")
+
+console.log("------------------------")
+var menu = "샐러드";
+switch (menu) {
+  case ("짜장면"):
+  case ("짬뽕"):
+  case ("샐러드"):
+    console.log(menu + "를 드시는군요 ")   
+    break;   
+  default: // 셋 다 참이 아닐 경우 (else)
+    console.log("그럼 뭐 드실래요?")
+} 
+
+console.log("------------맨 앞의 값만을 가지고 사용한다. --------------")
+switch (menu) {
+  case ("짜장면" || "짬뽕" || "샐러드"): // 맨 앞의 것만 비교하고 아니면 넘어갑니다.(단락평가)
+    console.log(menu + "를 드시는군요 ")   
+    break;   
+  default: // 셋 다 참이 아닐 경우 (else)
+    console.log("그럼 뭐 드실래요?")
+} 
