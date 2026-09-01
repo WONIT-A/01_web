@@ -18,12 +18,60 @@ var array1 = ['apple', 'banana', 'carrot']
 // 맨뒤에 값을 삽입 push(), 삭제 pop() 
 array1.push("daisy")
 console.log(array1)
+array1.pop()
+console.log(array1)
+
+// 맨 앞(unshift, shift)
+array1.unshift("daisy") // 맨 앞에 삽입 
+console.log(array1)
+array1.shift() // 맨 앞의 값을 제거
+console.log(array1)
+
+// 중간 어딘가에 값을 넣어야 하는 경우도 있을 겁니다. (splice) 
+// splice(시작index, 삭제할개수, 삽입할 값)
+array1.splice(1, 1, "ban");
+console.log(array1)
+
+// 맨 뒤에 donut을 추가 
+// array1.push("donut")
+array1.splice(3, 0, "donut");
+
+// ban~ 를 삭제하고 bee, betray라는 단어를 넣어보세요.
+array1.splice(1, 1, 'bee', 'betray')
+console.log(array1)
+
+// array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+//             (start는 무조건 있어야 함 [, 생략가능 [, 생략가능, ...]]]  )
+array1.splice(1, 2)
+console.log(array1, 'bee', 'betray')
 
 // JS의 sort는 기본적으로 유니코드로 정렬을 합니다. 숫자는 어떻게 정렬해야 할까요?
+var array2 = [-565, -3, 556, 1.3, NaN, null, undefined, true, 0]
+array2
+console.log(Number(null))
+console.log(typeof(NaN))
+
+// JS의 기본 SORT는 문자열 순서대로 정렬 
+console.log(array2.sort())
+
+// 숫자로서 오름차순(작은 거~큰 거), 또는 내림차순(큰 거~작은 거) 정렬하는 방법?
+console.log(array2.sort(function (a, b) {
+  return a - b;
+}));
 
 
 // -2. Set(집합) - 중복을 걸러내는 유형. new Set([1,3,4,5,6,6])
-
+var set1 = [1,3,4,4,5,6,6]
+set1 = new Set(set1) // 중복되는 값들을 걸러낸 집합자료형 
+set1
+console.log(typeof(set1))
+// set1.push(6,7,8)
+set1.add(7);
+console.log(set1)
+set1.add(6); // 이미 있는 값은 삽입 불가 
+console.log(set1)
+set1.delete(6); // 값을 삭제
+console.log(set1)
 
 // -3. Object(일반 객체) - key(기본 자료형)로 value를 부르는 종류의 dictionary 타입
 //   - key는 기본자료형만 사용 가능합니다. (object, array, function은 불가)
@@ -32,6 +80,9 @@ console.log(array1)
 //   - key 중심으로 움직입니다. value로 key를 찾을 수 없습니다.
 //   - key의 자료형은 string, number, boolean, null, undefined, symbol이 가능합니다.
 //   - value는 모든 자료형이 가능합니다. (기본자료형, 참조자료형 모두 가능)
+var dict1 = {"name": "김연지", "age" : 20, "hobby" : ["자전거 타기", "책읽기"] }
+          // key(문패) : value(값), key : value, key:value 
+console.log(dict1['name']) 
 
 
 /* -4. Map: dictionary와 마찬가지로 키-값으로 쌍을 저장합니다. 키로 값을 꺼내 씁니다.
