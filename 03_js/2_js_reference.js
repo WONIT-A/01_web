@@ -5,10 +5,19 @@
 //   - 순서대로 값을 꺼낼 수 있다. (index로)
 //   - 자바스크립트의 배열 index는 0부터 시작
 //   - 배열의 길이는 .length 라는 속성으로 확인
-
-
+var array1 = [1, '가', true, null, , [1, 2, 3]] // 자료형을 강제하지 않기 때문에 각 방마다 다른 자료형을 넣을 수 있습니다. 
+array1
+console.log(array1[4]) // 배열의 크기를 넘어서는 방번호(index)를 부르면 undefined 
+console.log(typeof array1)
+console.log(array1.length)
 
 // 실습: array1이라는 배열을 만들고 apple, banana, carrot 세개의 문자열을 각 index에 넣어보세요.
+var array1 = ['apple', 'banana', 'carrot']
+
+// 순서대로 값을 저장하는 자료구조 (선형 자료구조)
+// 맨뒤에 값을 삽입 push(), 삭제 pop() 
+array1.push("daisy")
+console.log(array1)
 
 // JS의 sort는 기본적으로 유니코드로 정렬을 합니다. 숫자는 어떻게 정렬해야 할까요?
 
