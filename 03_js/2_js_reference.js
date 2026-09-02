@@ -210,6 +210,18 @@ for (var i=0; i < arr.length; i++) {
   console.log(`${arr[i]}야, 안녕!`)
 }
 
+// 방번호를 경유하지 않고 직접 값을 끄집어내는 방문: for in: true/false로 더이상 끄집어낼 게 없을 때까지
+for (var index in arr) {
+  console.log(`${arr[index]}야, 안녕!`)
+}
+
+// for of 직접 방에 접근해서  
+// for (하나씩 끄집어 낼 데이터를 부르는 공갈문자 in 집합자료명)  
+console.log("=======================")
+for (var value of arr) {
+  console.log(`${value}야, 안녕!`)
+}
+
 dict2 // dict 
 // dict2는 key의 셀수있는 목록(Iterator)을 만듭니다. 
 // 자체 목록에서 key를 하나씩 끄집어내며 true를 리턴해서 반복문을 동작시킵니다.
@@ -233,7 +245,53 @@ for (var [key, value] of map1) {
 
 // -2. while문 - 반복할 횟수가 정해지지 않았을 때
 // 1. while문 바깥에 조건을 끝낼 실마리를 만들어주기
+// if / switch / for / while 같은 코드블럭이 안으로 들어가는 동작의 앞뒤에는
+// 엔터를 쳐서 다른 실행문들과 구분해서 보기 좋게 작성합니다. 
+var i = 1; // 초기값
+
+while (i < 6) { // 조건식
+  console.log(i); // 실행문
+  i++; // 증감식
+}
+
+/*
+초기값
+
+while (조건식) {
+  실행문
+  증감식
+}
+*/
+
+// 5~1까지 출력
+var i = 5; // 초기값
+
+while (i >= 1) { // 조건식
+  console.log(i); // 실행문
+  i--; // 증감식
+}
+
+
+
+// 1, 3, 5만 출력
+var i = 1; // 초기값
+
+while (i < 6) { // 조건식
+  console.log(i); // 실행문
+  i+=2; // 증감식
+}
+
 // 2. 무한반복으로 작성하고 break, continue로 강제로 흐름을 제어
+
+var i = 1;
+
+while (true) {
+  console.log(i)
+  i++;
+  if (i > 5) {
+    break; // break는 특수한 키워드로 break를 만나는 순간 { } 바깥으로 인터프리터가 빠져나갑니다.
+  }
+}
 
 
 
