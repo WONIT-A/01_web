@@ -99,6 +99,18 @@ dict2['마'] = '마술사'; // key가 없으면 새로 key-value 쌍이 추가
 dict2
 delete dict2['가'] // dict2의 '가' 방을 삭제 
 dict2
+console.log(delete dict2['가']) // key가 있건 없건 true가 리턴 
+
+console.log('라' in dict2) // in 키워드로 key가 있으면 true
+console.log('나비' in dict2) // in 키워드로 key에 없으면 false 
+
+console.log(Object.keys(dict2)) // key 만 array 형태로 리턴 
+console.log(Object.values(dict2)) // value 만 array 형태로 리턴 
+console.log(Object.entries(dict2)) // [key, value]  array 형태로 리턴 
+
+
+// 자체적으로 dict의 key를 모두 문자열로 바꿔서 저장한다.
+// JSON: JavaScript Object Notation: "{'name':'김연지', 'age':'20'}"
 
 /* -4. Map: dictionary와 마찬가지로 키-값으로 쌍을 저장합니다. 키로 값을 꺼내 씁니다.
     - 키로 모든 데이터 타입을 받아줍니다. 
@@ -107,19 +119,116 @@ dict2
     - set() get()으로 삽입, 조회를 할 수 있습니다.
     - 뎁스가 복잡하거나, 데이터의 입력 순서, 양이 많을 때 
 */
+var map1 = new Map(); 
+map1['가'] = '가위'; // map이지만 순서가 보장되지 않음.
+console.log(map1['가']); // dict와 같습니다.
 
+// 되기는 되지만 이렇게 직접 접근하지 않고 메서드를 경유하기 위해 map을 씁니다.
+
+// 함수: 코드의 순서를 정해서 한번에 부를 수 있도록(호출할 수 있도록) 만들어 놓은 덩어리
+         // 입력에 대해 일관된 출력을 보장하는 코드 덩어리
+         // 프로그래밍에서의 함수를 따지고 보면 딱 2개 밖에 없습니다.
+         // getter(보여주는 것)와 setter(해당 값을 변경하는 것) 
+// 나, 나비 / 다, 다람쥐 
+// 나, 나비를 빼보세요. 
+map1.set('나', '나비');
+map1.set('다', '다람쥐');
+map1.set('다', '다리미'); // 이미 있는 key는 value가 바뀝니다.
+map1.set(1, 1010); // 들어오는 순서가 보장됩니다. 
+console.log(map1.get('나')) // set으로 삽입한 값만 get으로 부를 수 있습니다.
+map1.delete('나')
+// console.log(Object.entries(map1)); // dict로 우겨넣은 값만 출력됨 
+console.log(map1.get('1')); // undefined: key에 원래 자료형 그대로를 보관하기 때문에 문자열로 변환되지 않습니다. 
+map1;
+console.log(map1.keys());
+console.log([...map1.keys()]);
+console.log([...map1.entries()]);
 
 /*
-9. 반복문: for/while
+9. 반복문: for-반복의 횟수가 정해져 있을 때
+          /while-반복의 횟수가 정해져 있지 않을 때 
 -1. for (초기값; 조건; 증감식) {
   반복되어야 할 실행문
+
+  반복되는 숫자를 의미하는 변수를 i, iter, count 변수명을 주로 사용합니다.
+  반복문 안에 반복문을 작성할 경우(중첩반복문) 내부 반복변수를 알파벳을 하나씩 더해가면서 사용
+      j, k, l, m 
+  
+  2 x 1 = 2
+  2 x 2 = 4
+  2 x 9 = 18
+  ....   
+  3 x 1 = 3
+  3 x 2 = 6 
 }
 */
 
+for (var i = 0; i < 3; i++) {
+  console.log(i);
+}
+
+console.log('-----------------------------------')
+// 1~5까지 출력되도록 변경
+    // 초기값 ; 조건 ; 증감식 
+for (var i = 1; i < 6; i++) {
+  console.log(i);
+}
+
+console.log('-----------------------------------')
+// 5~1까지 출력되도록 변경
+for (var i = 5; i > 0; i--) {
+  console.log(i);
+}
+console.log('-----------------------------------')
 // 실습: 5, 3, 1이 출력되도록 변경
+for (var i = 5; i > 0; i = i-2) {
+  console.log(i);
+}
+
+// 좋은 코드
+// 1. 짧은 코드 (수정할 때도 코드 10줄에 에러가 1번씩 난대요)
+// 2. 불필요한 동작이 없는 코드 
+// 3. 변수명/함수명 등이 직관적이어서 보면 이해할 수 있는 코드 
+// 4. 주석이 잘 달려있어서 이해할 수 있는 코드 
+for(var i = 5 ; i > 0; i -= 2){
+  console.log(i)
+}
+
+for (var i = 5; i > 0; i--) {
+  if (i % 2 == 0) {
+  } else {
+    console.log(i);
+  }
+}
 
 // 배열의 길이는 .length 라는 속성으로 확인
+var arr = ["김연지", "신짱구", "신짱아"] 
+console.log(arr.length)   // ~~야, 안녕? 이라는 글귀를 더해서 3명한테 인사를 해주세요.
 
+// 배열의 방의 개수를 조건식으로 사용 
+for (var i=0; i < arr.length; i++) {
+  console.log(`${arr[i]}야, 안녕!`)
+}
+
+dict2 // dict 
+// dict2는 key의 셀수있는 목록(Iterator)을 만듭니다. 
+// 자체 목록에서 key를 하나씩 끄집어내며 true를 리턴해서 반복문을 동작시킵니다.
+// 더이상 끄집어낼 key가 없으면 false를 리턴해서 반복문을 중단시킵니다.
+for (var key in dict2) {
+  console.log(`key: ${key} - value: ${dict2[key]}`) // key만 출력
+}
+
+dict3 = {}
+console.log(key in dict3) 
+
+// map은 .size() 라는 메서드로 방의 개수를 구할 수 있습니다. 
+// map1에 들어있는 key - value를 출력해보세요.
+console.log([...map1.entries()])
+
+    // 구조 분해:  [key, value] (['다', '다리미'])
+for (var [key, value] of map1) {
+  console.log(`key: ${key} - value: ${value}`)
+}
 
 
 // -2. while문 - 반복할 횟수가 정해지지 않았을 때
