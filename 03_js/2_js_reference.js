@@ -16,7 +16,7 @@ var array1 = ['apple', 'banana', 'carrot']
 
 // 순서대로 값을 저장하는 자료구조 (선형 자료구조)
 // 맨뒤에 값을 삽입 push(), 삭제 pop() 
-array1.push("daisy")
+array1.push("daisy") // 특정 자료형에만 사용가능한 동작을 담고 있는 함수들을 (메서드)
 console.log(array1)
 array1.pop()
 console.log(array1)
@@ -39,6 +39,7 @@ array1.splice(3, 0, "donut");
 // ban~ 를 삭제하고 bee, betray라는 단어를 넣어보세요.
 array1.splice(1, 1, 'bee', 'betray')
 console.log(array1)
+array1.splice(1, 1, 0,1)
 
 // array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
 //             (start는 무조건 있어야 함 [, 생략가능 [, 생략가능, ...]]]  )
@@ -62,9 +63,12 @@ console.log(array2.sort(function (a, b) {
 
 // -2. Set(집합) - 중복을 걸러내는 유형. new Set([1,3,4,5,6,6])
 var set1 = [1,3,4,4,5,6,6]
+set1
 set1 = new Set(set1) // 중복되는 값들을 걸러낸 집합자료형 
 set1
 console.log(typeof(set1))
+
+// Create / Read / Update / Delete  
 // set1.push(6,7,8)
 set1.add(7);
 console.log(set1)
@@ -84,6 +88,17 @@ var dict1 = {"name": "김연지", "age" : 20, "hobby" : ["자전거 타기", "�
           // key(문패) : value(값), key : value, key:value 
 console.log(dict1['name']) 
 
+// dict2 를 만들어주시고, 가: 가위, 나:나비, 라;라디오, 다:다람쥐 
+var dict2 = {"가" : "가위", "나": "나비", "라":"라디오", "다":"다람쥐", 1: 1010, true: {'참':true} }
+dict2
+
+// 특정 값을 꺼내는 방법  변수명[key] 로 value에 접근합니다. 
+console.log(dict2[1])
+dict2['가'] = '가랑이'; // key가 이미 있으면 value가 변경됨
+dict2['마'] = '마술사'; // key가 없으면 새로 key-value 쌍이 추가 
+dict2
+delete dict2['가'] // dict2의 '가' 방을 삭제 
+dict2
 
 /* -4. Map: dictionary와 마찬가지로 키-값으로 쌍을 저장합니다. 키로 값을 꺼내 씁니다.
     - 키로 모든 데이터 타입을 받아줍니다. 
