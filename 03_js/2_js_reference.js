@@ -293,9 +293,58 @@ while (true) {
   }
 }
 
+// 5 ~ 1 
+var i = 5;
+
+while (true) {
+  console.log(i);
+  i--;
+  if (i < 1) {
+    break; // break는 특수한 키워드로 break를 만나는 순간 { } 바깥으로 인터프리터가 빠져나갑니다.
+  }
+}
+
+// 1, 3, 5 
+var i = 0;
+
+while (true) {
+  i++;
+  
+  if (i > 5) {
+    break; // break는 특수한 키워드로 break를 만나는 순간 { } 바깥으로 인터프리터가 빠져나갑니다.
+  }
+  
+  if (i % 2 === 0) {
+    continue; // continue는 건너뛰기. 아래 코드를 읽지 않고 반복문의 처음으로 돌아갑니다.
+  } else {
+    console.log(i);
+  }
+}
+
+
+// 동작하는 코드를 리팩토링해서 짧고, 직관적이고, 빨리 같은 결과를 출력하도록 
+
+// 1부터 5까지의 홀수를 출력합니다.
+for (let oddNumber = 1; oddNumber <= 5; oddNumber += 2) {
+  console.log(oddNumber);
+}
 
 
 // arr 와 .length 속성을 이용해서 arr의 모든 원소를 출력하는 while문을 만들어보세요.
+/*
+초기값;
+
+while (조건식) {
+  실행문;
+  증감식;
+}
+*/
+var i=0;
+
+while ( i < arr.length) {
+  console.log(`${arr[i]}야, 안녕!`);
+  i++;
+}
 
 
 // forEach (인덱스를 경유하지 않고 바로 값만 출력하는 메서드)
@@ -321,7 +370,129 @@ while (true) {
 -3. 화살표함수: () => { 동작 }
 */
 
-var arr = ['짱구', '짱아', '훈이']
+var arr = ['짱구', '짱아', '훈이'] // 값 자체를 넣고
+arr
+
+// js에서의 함수 
+function hello() {
+  console.log('안녕하세요')
+}
+
+hello()
+
+// parameter(매개변수) 로 변수를 전달하는 함수 
+// 매개변수를 몇 개라도 구분해서 넣기 위해 ,로 값을 구분해서 넣습니다.
+function hello1(이름, 나이) {
+  console.log(`${이름} 님, 안녕하세요. ${나이}살 이시군요.`)
+}
+
+hello1() // 이름 자리에 들어와야할 매개변수를 생략했기 때문에 undefined 님, 안녕하세요. 
+hello1('신짱구')
+hello1('신짱아', 5)
+
+function hello2(이름, 나이) {
+  return `${이름} 님, 안녕하세요. ${나이}살 이시군요.`; 
+  // 인터프리터가 함수 동작을 다 마치고 돌아갈 때 달고 돌아간다.
+}
+
+var hello = hello1()
+var hi = hello2()
+
+console.log(hello)
+console.log(hi)
+
+function hello3() {
+  return `hello3가 종료될 때 달고 돌아온 값`
+}
+
+var hi2 = hello3()
+console.log(hi2)
+
+console.log("------- 함수 -------------")
+// 1, 3, 5를 출력하는 반복문을  oddNums() 를 호출하면 매번 같은 동작이 실행되도록 함수 안에 넣어주세요.
+// 1부터 5까지의 홀수를 출력합니다.
+function oddNums() {
+  for (let oddNumber = 1; oddNumber <= 5; oddNumber += 2) {
+    console.log(oddNumber); // 보여주고 끝나는 함수
+  }
+}
+
+oddNums()
+
+// start 부터 end 까지의 홀수를 출력합니다.
+// 아무것도 start나 end에 넣지 않으면 1, 10이 들어가도록 기본값(default parameter)을 주고 싶어요.
+// 함수의 입력값으로 파라미터=기본값, 파라미터=기본값 
+function getOddNums(start=1, end=10) {
+  for (let oddNumber = start; oddNumber <= end; oddNumber++) {
+    if (oddNumber % 2 === 1) {
+      console.log(oddNumber); 
+    }
+  }
+}
+
+console.log("------ getOddNums() ----------")
+getOddNums(2,16)
+
+
+// 1부터 5까지의 홀수를 return합니다.
+function setOddNums() {
+  oddNums = [] // 배열을 만들고
+  
+  for (let oddNumber = 1; oddNumber <= 5; oddNumber += 2) {
+    oddNums.push(oddNumber); // 값을 집어넣고
+  }
+  
+  return oddNums; // 반복이 끝나면 달고 돌아갑니다.
+    // return의 역할:
+    // 1. 함수를 종료시킵니다.   2. return 뒤에 만들어진 값을 메모리에 돌려줍니다.
+}
+
+var result = setOddNums();
+result
+
+
+// start, end 까지 반복하면서 홀수만 가져와서 return하는 setOddNumsFinal(start, end)
+// 아무것도 넣지 않으면 start=1부터 end=5까지의 홀수를 return합니다.
+function setOddNumsFinal(start=1, end=5) {
+  oddNums = [] // 배열을 만들고
+  
+  for (let oddNumber = start; oddNumber <= end; oddNumber++) {
+
+    if (oddNumber % 2 === 1) {
+      oddNums.push(oddNumber); // 값을 집어넣고
+    }
+
+  }
+  
+  return oddNums; // 반복이 끝나면 달고 돌아갑니다.
+    // return의 역할:
+    // 1. 함수를 종료시킵니다.   2. return 뒤에 만들어진 값을 메모리에 돌려줍니다.
+}
+
+result = setOddNumsFinal(3,15);
+result
+
+
+// 화살표 함수  (a) => { a + 실행문 }
+ var test = (a) => {
+  console.log(a+' 테스트')
+}
+
+test('김연지')
+
+// 익명함수: function (a, b) { 실행문 } - 다른 함수의 보조 역할로 쓰고 버릴 거라서 이름을 생략 
+var numbers = [4, 2, 5, 1, 3];
+numbers.sort(function (a, b) {
+  return a - b;
+});
+console.log(numbers);
+
+// 익명함수에 이름을 ordered라고 붙임 
+var ordered = function (a, b) {
+  return a - b;
+}
+
+console.log(ordered(2, 3))
 
 // -4. 함수의 스코프
 //     1. 스코프 : 변수나 함수가 어디까지 접근해서 사용할 수 있는지. 
@@ -369,6 +540,8 @@ var arr = ['짱구', '짱아', '훈이']
  - 실제로는 function 으로 만들어집니다.
  - sugar coated 문법: 다른 언어와 호환되다 보니까 class 클래스명으로 만들면 내부적으로 코드를 변환해서 동작시켜줍니다. 
 */
+
+// 집합자료형 중에 우리만의 자료형을 만들어서 조금 편하게 데이터를 일괄적으로 관리하기 위한 class 
 
 function Person(name, age) {
   this.name = name;
