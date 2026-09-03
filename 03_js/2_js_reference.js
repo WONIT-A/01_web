@@ -361,11 +361,15 @@ while ( i < arr.length) {
       return 달고 돌아갈 덩어리 하나    
 }
 
+함수명(입력값1, 입력값2... )
+
 - 2. 익명함수: lambda처럼 쓰고 버리는 걸 기본으로 합니다.
-- var 함수명 = function(파라미터1, 파라미터2, 파리미터3 ...) {
+- var 함수명 = (파라미터1, 파라미터2, 파리미터3 ...) {
       파라미터를 받아서 실행할 실행문
       return 달고 돌아갈 덩어리 하나
 }
+
+함수명() 
 
 -3. 화살표함수: () => { 동작 }
 */
@@ -386,16 +390,23 @@ function hello1(이름, 나이) {
   console.log(`${이름} 님, 안녕하세요. ${나이}살 이시군요.`)
 }
 
+console.log("------------ return 없음 console에만 출력")
 hello1() // 이름 자리에 들어와야할 매개변수를 생략했기 때문에 undefined 님, 안녕하세요. 
 hello1('신짱구')
-hello1('신짱아', 5)
+console.log("-----------------")
+hello1('신짱아', 5) 
 
 function hello2(이름, 나이) {
   return `${이름} 님, 안녕하세요. ${나이}살 이시군요.`; 
   // 인터프리터가 함수 동작을 다 마치고 돌아갈 때 달고 돌아간다.
 }
 
+
+console.log("------------ return 없음 console에만 출력 2")
 var hello = hello1()
+
+
+console.log("------------ return 있음 console에 출력 X ")
 var hi = hello2()
 
 console.log(hello)
@@ -430,9 +441,10 @@ function getOddNums(start=1, end=10) {
   }
 }
 
-console.log("------ getOddNums() ----------")
-getOddNums(2,16)
 
+console.log("------ getOddNums() ----------")
+var result = getOddNums(1, 5)
+result
 
 // 1부터 5까지의 홀수를 return합니다.
 function setOddNums() {
@@ -494,6 +506,7 @@ var ordered = function (a, b) {
 
 console.log(ordered(2, 3))
 
+console.log("-------- scope 와 hoisting -------------")
 // -4. 함수의 스코프
 //     1. 스코프 : 변수나 함수가 어디까지 접근해서 사용할 수 있는지. 
 //     2. 호이스팅(Hoisting): 변수나 함수의 선언이 스코프의 최상단에서 먼저 읽은 것처럼 동작하는 것. 
@@ -513,47 +526,244 @@ console.log(ordered(2, 3))
 //     3) const : 블록 단위에서 사용이 됨. { } 
 //                 한번 값을 넣으면 바꿀 수 없음. 그러나 객체 내부의 속성 등은 수정 가능
 
+// console.log(z); // 선언만 끌어올려지므로 방은 있지만 방 안의 값을 확인 불가 
 
 // scope : 변수에 접근할 수 있는 위치를 제어 
-// var x = '가'; // 함수 범위
-// let y = '나'; // 블록 범위
-// const z = '다'; // 블록 범위, 상수 (값 변경 불가)
+// 전역변수(이 파일 안의 모든 영역에서 부를 수 있는 x, y, z)
+var x = '가'; // 함수 범위
+let y = '나'; // 블록 범위
+const z = '다'; // 블록 범위, 상수 (값 변경 불가)
 
-// function variableExample() {
-//     var x = 10; // 함수 범위
-//     let y = 20; // 블록 범위
-//     const z = 30; // 블록 범위, 상수 (값 변경 불가)
+// console.log(z);
 
-//     if (true) {
-//         var x = 40; // 같은 함수 내에서 var 변수는 덮어씌워짐
-//         let y = 50; // 블록 내에서만 유효
-//         const z = 60; // 블록 내에서만 유효
+variableExample() 
+// 함수를 선언하기 전에 불렀는데 동작 합니다. 인터프리터 언어는 한줄한줄 순서대로 읽는데 
+// hoisting(끌어올리기): 선언만 끌어올려지고 값은 올라가지 않습니다.
+                      // 익명함수, 화살표 함수를 변수명에 넣은 경우 hoisting이 되지 않음. 
 
-//         console.log('if문 내부:', x, y, z); // 40, 50, 60
-//     }
+function variableExample() {
+     var x = 10; // 함수 범위
+     let y = 20; // 블록 범위
+     const z = 30; // 블록 범위, 상수 (값 변경 불가)
 
-//     console.log('if문 외부:', x, y, z); // 40, 20, 30 (var는 재할당되었지만, let과 const는 블록 범위를 가짐)
-// }
+     if (true) {
+         var x = 40; // 같은 함수 내에서 var 변수는 덮어씌워짐
+         let y = 50; // 블록 내에서만 유효
+         const z = 60; // 블록 내에서만 유효
+
+         console.log('if문 내부(지역 변수):', x, y, z); // 40, 50, 60
+     }
+
+     console.log('if문 외부:', x, y, z); // 40, 20, 30 (var는 재할당되었지만, let과 const는 블록 범위를 가짐)
+ }
+
+console.log('함수 외부(전역 변수):', x, y, z);
+
+// variableExample()
 
 
-/* 11.  클래스: 같은 형식으로 사용하기 위한 자료형을 미리 만들어놓고 계속 객체를 찍어서 재사용 
+/* 11.  클래스: 같은 형식으로 사용하기 위한 자료형을 미리 만들어놓고 
+계속 객체를 찍어서 재사용 
  - 실제로는 function 으로 만들어집니다.
  - sugar coated 문법: 다른 언어와 호환되다 보니까 class 클래스명으로 만들면 내부적으로 코드를 변환해서 동작시켜줍니다. 
 */
 
 // 집합자료형 중에 우리만의 자료형을 만들어서 조금 편하게 데이터를 일괄적으로 관리하기 위한 class 
 
+// 클래스는 변수들을 찍어내는 규격이기 때문에 더 큰 개념이라는 의미로 대문자로 시작, 띄어쓰기 대신 대문자
+// PascalCase로 작성
+
+// 자주 쓰는 값(data, 변수)과 동작들(function, 함수)을 미리 만들어 놓고,
+// 필요한 상황에 그 때 그 때 조합해서 사용하는 프로그래밍 방법 
 function Person(name, age) {
-  this.name = name;
+  this.name = name; //  this. 새로 만들어지는 메모리 주소 
   this.age = age;
 }
 
+// 동작을 미리 만들어서 Person에게 넘겼습니다.
 Person.prototype.greet = function () {
     console.log('안녕하세요!' + this.name)
   }
 
+var 김연지 = new Person('김연지', 40); // new : 새로 방을 파 
+var 신짱구 = new Person('신짱구', 5); 
+console.log(김연지.age);
+김연지.greet();
+console.log(신짱구.name);
+신짱구.greet();
+
 // static: 클래스를 통해 접근하는 클래스 변수, 클래스 메서드
 // 인스턴스를 통해 접근하는 인스턴스 변수(this로 전달), 인스턴스 메서드
 // 은닉성 구현: #을 붙인 private 변수를 사용하여 외부에서 접근하지 못하도록 숨길 수 있습니다.
+class Person2 {
+
+  // 생성자(객체가 처음 만들어질 때 1번 자동으로 실행되는) 함수 
+  constructor(name, age) {
+    this.name = name; //  this. 새로 만들어지는 메모리 주소 
+    this.age = age;
+  }
+
+  // 메서드: Person2라는 설계도를 통해 만들어진 객체에게 Person2 자료형에만 동작하는 함수를 넘겨줍니다.
+  greet() {
+    console.log('Person2에서 - 안녕하세요!' + this.name)
+  }
+}
+
+var 김연지 = new Person2('김연지', 40);
+console.log(김연지.name);
+김연지.greet();
+
+// 고죠사토루 
+class Fighter extends Person2 {
+  fighting() {
+    console.log(`${this.name}이 싸웁니다.`)
+  }
+}
+
+var 고죠사토루 = new Fighter('고죠사토루', 80);
+console.log(고죠사토루.name);
+고죠사토루.greet();
+고죠사토루.fighting();
 
 
+// 클래스(설계도) : 빵틀 
+//                 클래스 변수, 클래스 메서드
+// - 관리자 입장(값, 동작)에서 몇개의 건물이 찍혀나갔는지, 대륭포스트타워에 대해 어떻게 설명할지 
+// 인스턴스(건물) : 빵 
+//                 인스턴스 변수, 인스턴스 메서드 
+// - 사용자 입장(값, 동작) 몇호에 누가 일하는지, 우리 건물 엘리베이터를 어떻게 부르는지 
+
+
+
+// Student 클래스를 하나 만들어서 greet() , study(과목명) 만 쓸 수 있습니다.
+class Student extends Person2 {
+  // 소속을 같이 받고 싶어요.
+
+   constructor(name, age, school) {
+    // super(변수명, 변수명) 으로 부모 클래스의 생성자를 재사용한다 
+    super(name, age); // 부모클래스에 있는 해당 변수에 넘겨주겠음
+    // this.name = name;
+    // this.age = age;
+    this.school = school;
+   }
+
+   study(과목명='무언가') {
+    // this 로 해당 인스턴스의 메모리 주소를 전달 
+    console.log(`${this.name}이/가 ${과목명}을/를 ${this.school}에서 공부 중입니다.`)
+   }
+}
+
+var 신짱구 = new Student('신짱구', 5, '떡잎유치원');
+신짱구.study('수학'); // 자식클래스에 새로 추가한 인스턴스 메서드
+신짱구.greet(); // 부모클래스에 있는 인스턴스 메서드를 재사용
+
+
+// OnlineFighter 클래스를 하나 Fighter를 상속받아서 keyboardFighting() {'숨어서 싸웁니다'}
+class OnlineFighter extends Fighter {
+
+  fighting() { // 부모클래스에 원래 있는 메서드를 재정의(덮어쓰기)
+    console.log('숨어서 싸웁니다')
+  }
+
+    keyboardFighting() { // 부모클래스에 원래 있는 메서드를 재정의(덮어쓰기)
+    console.log('숨어서 싸웁니다')
+  }
+}
+
+키보드워리어 = new OnlineFighter('김연지', 11)
+키보드워리어.greet(); // 할아버지클래스(Person2)의 기능
+키보드워리어.fighting(); // 부모클래스(Fighter)의 기능을 재정의(Override)
+// 키보드워리어.keyboardFighting(); // 자기자신(OnlineFighter)의 기능
+고죠사토루.fighting();
+
+
+// BankAccount 라는 은행 계좌를 관리하기 위한 class를 만들어보겠습니다.
+// bankName, name, accountNumber, balance 
+// #을 앞에 붙인 변수는 클래스 외부에서 접근이 불가능하도록(private) 숨길 수 있습니다. 
+class BankAccount {
+
+  #balance; 
+
+  // 클래스 변수: static 이라는 키워드를 앞에 적어둔 클래스 변수로 클래스에서 관리하기 위한 속성을 저장합니다. 
+  static bankName = '우리';
+  static accountNo = 0; // 이 은행에 계좌를 만든 총 계좌수 
+
+  // 클래스 메서드: static 이라는 키워드를 앞에 적어서 클래스에서 필요한 동작을 만듭니다.
+  static hello() {
+    console.log(`어서오세요. ${this.bankName}은행입니다~ 개설 이래 현재까지 ${this.accountNo}개의 계좌가 있답니다.`)
+  }
+
+  // 인스턴스 변수: this 라는 키워드로 각 새로 만들어진 고객 인스턴스만의 고유한 값들을 전달  
+  constructor(name, accountNumber, balance) {
+    this.name = name;
+    this.accountNumber = accountNumber;
+    this.#balance = balance;
+    this.cusAccountNo = ++BankAccount.accountNo; // 그 때의 계좌수 
+  }
+
+  // 함수인 걸 숨겨서 변수처럼 이 값을 파악하게 하려고 
+  // get -> 조회 , set -> 수정 
+  // 인스턴스 메서드: deposit: 입금  - 기존 balance에 새로 들어온 금액을 추가
+  set deposit(amount=0) { // setter : 값을 변경만 하는 함수 
+    this.#balance += amount;
+  } 
+
+  // 인스턴스 메서드: withdraw: 출금 - 기존 balace에 새로 빠져나간 금액을 제외 
+  set withdraw(amount=0) { // setter: 값을 변경만 하는 함수 
+    this.#balance -= amount;
+  } 
+
+  // private 변수의 조회만 가능하도록 작성한 getter 함수 
+  // 실제로는 함수지만 외부에서 메서드로 사용할 때 변수처럼 부르게 됩니다.
+  get checkAmount() {
+    console.log(this.#balance);
+  }
+}
+
+var 아이유 = new BankAccount('IU', '123-45', 30000);
+아이유
+// 아이유.deposit(40000);
+아이유.deposit = 40000;
+// 아이유.checkAmount();
+아이유.checkAmount = -9999999999999999; 
+console.log('checkomout를 바꾼 후 ------------- ')
+아이유.checkAmount;
+아이유
+아이유.withdraw = 4000;
+아이유.checkAmount;
+아이유
+
+// 클래스 변수와 클래스 메서드는 클래스를 통해 접근
+BankAccount.hello();
+console.log(BankAccount.bankName);
+
+// 객체지향프로그래밍의 결과를 최대한 살려서 장점처럼 써봅시다.
+// 변수에 직접 접근이 가능하다는 것은 직접 수정도 할 수 있다는 뜻 
+// 변수를 확인하거나 조작할 때 method를 경유하도록 만드는 게 권장됩니다.
+
+// console.log(아이유.#balance); // 없는 게 아니라 숨어있음. 그래서 getter로만 확인하고 setter로만 변경 가능 
+
+// BankAccount를 상속받은 InsAccount를 만들어주세요. 
+// 클래스 변수 를 bankName "동양" 으로 바꿔서 재정의(override)
+// 생성자에 kind 라는 인스턴스 변수를 추가해서  default값은 변액 등 보험의 종류를 넣을 수 있도록 추가해보세요. 
+
+class InsAccount extends BankAccount {
+
+  static bankName = '동양'; // 변수의 overriding 
+  static accountNo = 0; // 0으로 변수를 overriding 
+
+  constructor(name, accontNumber, balance, kind="변액") {  // 생성자 메서드의 오버라이딩
+    super(name, accontNumber, balance);
+    this.kind = kind; // 추가해서 사용할 변수명  
+    this.cusAccountNo = ++InsAccount.accountNo; 
+  }
+}
+
+InsAccount.hello();
+var 송준표 = new InsAccount('송준표', '123-11', 50000);
+console.log(InsAccount.bankName);
+var 송준표2 = new InsAccount('송준표2', '123-11', 50000);
+InsAccount.hello();
+송준표
+송준표2
+// 30분까지 작정하고 확인해보십시오. 
