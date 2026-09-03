@@ -22,6 +22,12 @@
   <script defer>
     alert("🔵 defer 스크립트 실행됨 (DOMContentLoaded 전에 실행됨)");
     console.log("🔵 defer 스크립트 실행됨 (DOMContentLoaded 전에 실행됨)");
+    const el = document.getElementById("target");
+        if (el) {
+        el.textContent = "✅ 변경 성공!";
+        } else {
+        console.error("❌ #target 요소를 찾지 못했어요!");
+        }
 </script>
 </head>
 
@@ -45,12 +51,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         alert("✅ [5] DOMContentLoaded 발생");
         console.log("✅ [5] DOMContentLoaded 발생");
-        const el = document.getElementById("target");
-        if (el) {
-        el.textContent = "✅ 변경 성공!";
-        } else {
-        console.error("❌ #target 요소를 찾지 못했어요!");
-        }
+        
     });
 
     window.addEventListener("load", () => {

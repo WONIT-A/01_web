@@ -766,4 +766,22 @@ var 송준표2 = new InsAccount('송준표2', '123-11', 50000);
 InsAccount.hello();
 송준표
 송준표2
-// 30분까지 작정하고 확인해보십시오. 
+// 30분까지 작정하고 확인해보십시오.
+
+
+// 변수명은 count
+let count = 0;
+// add() 누를 때마다 count가 1씩 추가
+function add() {
+  count++;
+}
+add()
+add()
+
+count
+// minus()를 누를 때마다 count가 1씩 감소
+function minus() {
+  count--;
+}
+minus()
+count
